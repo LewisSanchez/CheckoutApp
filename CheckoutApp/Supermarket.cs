@@ -6,14 +6,17 @@ namespace CheckoutApp
     public class Supermarket : ISupermarket
     {
         private Dictionary<char, int> _carriedItemPrices;
+        private Dictionary<char, ISubtotalCalculatorStrategy> _itemCheckoutCalculators;
 
         /// <summary>
         /// Creates an instance of a Supermarket with the specified item prices.
         /// </summary>
-        /// <param name="itemPrices">List of items and their prices that will be sold by the Supermarket.</param>
-        public Supermarket(Dictionary<char, int> itemPrices)
+        /// <param name="itemPrices">Dictionary of items and their prices that will be sold by the Supermarket.</param>
+        /// <param name="itemCheckoutCalculators">Dictionary of standard and promotional calculators that applies to each Item.</param>
+        public Supermarket(Dictionary<char, int> itemPrices, Dictionary<char, ISubtotalCalculatorStrategy> itemCheckoutCalculators)
         {
             _carriedItemPrices = itemPrices;
+            _itemCheckoutCalculators = itemCheckoutCalculators;
         }
 
         /// <summary>
@@ -31,22 +34,11 @@ namespace CheckoutApp
 
             items = items.ToUpper();
 
-            var purchasedItemQuantities = FindPurchasedItemQuantities(items);
-            var purchasedItemList = purchasedItemQuantities.Keys.ToList();
+            var checkoutItemQuantities = FindCheckoutItemQuantities(items);
+            var checkoutItemList = checkoutItemQuantities.Keys.ToList();
 
-            foreach (var purchasedItem in purchasedItemList)
-            {
-                if (purchasedItem == 'B')
-                {
-                    var reducedPricedGroupCount = purchasedItemQuantities[purchasedItem] / 5;
-                    var regularPricedCount = purchasedItemQuantities[purchasedItem] % 5;
-
-                    total += 3 * 50 * reducedPricedGroupCount;
-                    total += _carriedItemPrices[purchasedItem] * regularPricedCount;
-                }
-                else
-                    total += _carriedItemPrices[purchasedItem] * purchasedItemQuantities[purchasedItem];
-            }
+            foreach (var checkoutItem in checkoutItemList)
+                total += _itemCheckoutCalculators[checkoutItem].CalculateSubtotal(_carriedItemPrices[checkoutItem], checkoutItemQuantities[checkoutItem]);
 
             return total;
         }
@@ -56,7 +48,7 @@ namespace CheckoutApp
         /// </summary>
         /// <param name="items">character string.</param>
         /// <returns>The quantity of each item that will be checked out.</returns>
-        private Dictionary<char, int> FindPurchasedItemQuantities(string items)
+        private Dictionary<char, int> FindCheckoutItemQuantities(string items)
         {
             var itemQuantities = new Dictionary<char, int>();
 

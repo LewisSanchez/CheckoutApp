@@ -11,9 +11,9 @@ namespace CheckoutApp
         static void Main(string[] args)
         {
             var items = "ABBACBBAB";
-            var market = new Supermarket(ItemPriceLoader.Load());
+            var market = new Supermarket(Loader.LoadItems(), Loader.LoadSubtotalCalculators());
 
-            Console.WriteLine(market.Checkout(items));
+            Console.WriteLine($"Checkout total: {market.Checkout(items)}");
         }
     }
 }

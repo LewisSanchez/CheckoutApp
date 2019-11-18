@@ -118,7 +118,7 @@ namespace CheckoutAppTests
 
         private Supermarket GetSupermarket()
         {
-            return new Supermarket(ItemPriceLoader.Load());
+            return new Supermarket(Loader.LoadItems(), Loader.LoadSubtotalCalculators());
         }
     }
 }

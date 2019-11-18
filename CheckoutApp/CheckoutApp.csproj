@@ -43,10 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISupermarket.cs" />
-    <Compile Include="ItemPriceLoader.cs" />
+    <Compile Include="Loader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ISubtotalCalculatorStrategy.cs" />
+    <Compile Include="StandardSubtotalCalculator.cs" />
     <Compile Include="Supermarket.cs" />
+    <Compile Include="ThreeForFivePromotionalCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
