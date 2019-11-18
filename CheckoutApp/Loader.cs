@@ -28,12 +28,12 @@ namespace CheckoutApp
         public static Dictionary<char, ISubtotalCalculatorStrategy> LoadSubtotalCalculators()
         {
             var standardSubtotalCalculator = new StandardSubtotalCalculator();
-            var threeForFivePromotionalCalculator = new FiveForThreePromotionalCalculator();
+            var FiveForThreePromotionalCalculator = new FiveForThreePromotionalCalculator();
 
             return new Dictionary<char, ISubtotalCalculatorStrategy>
             {
                 { 'A', standardSubtotalCalculator },
-                { 'B', threeForFivePromotionalCalculator },
+                { 'B', FiveForThreePromotionalCalculator },
                 { 'C', standardSubtotalCalculator }
             };
         }
