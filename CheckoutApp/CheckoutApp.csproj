@@ -49,7 +49,7 @@
     <Compile Include="ISubtotalCalculatorStrategy.cs" />
     <Compile Include="StandardSubtotalCalculator.cs" />
     <Compile Include="Supermarket.cs" />
-    <Compile Include="ThreeForFivePromotionalCalculator.cs" />
+    <Compile Include="FiveForThreePromotionalCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
