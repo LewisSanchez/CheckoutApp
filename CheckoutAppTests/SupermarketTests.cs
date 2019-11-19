@@ -3,6 +3,10 @@ using CheckoutApp;
 
 namespace CheckoutAppTests
 {
+    /// <summary>
+    /// Tests for the Supermarket's checkout method. Each test provides
+    /// valid and invalid characters to the checkout method.
+    /// </summary>
     [TestClass]
     public class SupermarketTests
     {
@@ -31,7 +35,7 @@ namespace CheckoutAppTests
         [TestMethod]
         public void InvalidItemsList_Expect0()
         {
-            var items = "!@#$%^";
+            var items = "!1@3#5$7%^";
             var supermarket = GetSupermarket();
 
             var expected = 0;

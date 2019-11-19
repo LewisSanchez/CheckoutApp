@@ -5,8 +5,8 @@
     /// </summary>
     public class FiveForThreePromotionalCalculator : ISubtotalCalculatorStrategy
     {
-        private const int DISCOUNT_SCALER = 3;
-        private const int DISCOUNT_ITEM_QUANTITY = 5;
+        private const int WHAT_YOU_PAY_QUANTITY = 3;
+        private const int PROMO_TAKE_HOME_QUANTITY = 5;
 
         public FiveForThreePromotionalCalculator()
         {
@@ -19,14 +19,14 @@
         /// </summary>
         /// <param name="price">The price of an item.</param>
         /// <param name="checkoutQuantity">The checkout quantity of an item.</param>
-        /// <returns></returns>
+        /// <returns>The checkout total for the item.</returns>
         public int CalculateSubtotal(int price, int checkoutQuantity)
         {
             var subtotal = 0;
-            var numberOfDiscountedGroups = checkoutQuantity / DISCOUNT_ITEM_QUANTITY;
-            var numberOfRegularPricedItems = checkoutQuantity % DISCOUNT_ITEM_QUANTITY;
+            var numberOfDiscounts = checkoutQuantity / PROMO_TAKE_HOME_QUANTITY;
+            var numberOfRegularPricedItems = checkoutQuantity % PROMO_TAKE_HOME_QUANTITY;
 
-            subtotal += DISCOUNT_SCALER * price * numberOfDiscountedGroups;
+            subtotal += WHAT_YOU_PAY_QUANTITY * price * numberOfDiscounts;
             subtotal += price * numberOfRegularPricedItems;
 
             return subtotal;
